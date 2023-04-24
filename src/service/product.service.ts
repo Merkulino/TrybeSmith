@@ -1,6 +1,6 @@
 import Product from '../interfaces/Product';
-import ProductModel from '../model/product.model';
-import connection from '../model/connection';
+import ProductModel from '../models/product.model';
+import connection from '../models/connection';
 
 class ProductService {
   model: ProductModel;

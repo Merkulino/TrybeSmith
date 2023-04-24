@@ -1,6 +1,6 @@
 import Orders from '../interfaces/Orders';
-import OrdersModel from '../model/orders.model';
-import connection from '../model/connection';
+import OrdersModel from '../models/orders.model';
+import connection from '../models/connection';
 
 class OrdersService {
   model: OrdersModel;

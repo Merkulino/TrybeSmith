@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../interfaces/User';
-import UserModel from '../model/user.model';
-import connection from '../model/connection';
+import UserModel from '../models/user.model';
+import connection from '../models/connection';
 
 const SECRET_KEY = process.env.JWT_SECRET || 'pswodsecrt';
 
