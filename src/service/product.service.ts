@@ -9,6 +9,10 @@ class ProductService {
     this.model = model;
   }
 
+  public async getProducts(): Promise<Product[]> {
+    return this.model.getProducts();
+  }
+
   public async newProduct(data: Product): Promise<Product> {
     return this.model.newProduct(data);
   }

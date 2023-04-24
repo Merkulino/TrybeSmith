@@ -8,9 +8,9 @@ class ProductModel {
     this.connect = connect;
   }
 
-  public async getProductById(id: number): Promise<Product[]> {
+  public async getProducts(): Promise<Product[]> {
     const [product] = await this.connect
-      .execute<RowDataPacket[]>('SELECT * FROM Trybesmith.products WHERE id = ?', [id]);
+      .execute<RowDataPacket[]>('SELECT * FROM Trybesmith.products');
     return product as Product[];
   }
 
