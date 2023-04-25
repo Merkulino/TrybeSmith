@@ -1,7 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
-import { loginInputSchema, productInputSchema } from './joi';
-// import LoginInput from '../interfaces/LoginInput';
-// import Product from '../interfaces/Product';
+import { ValidationError } from 'joi';
+import { loginInputSchema, productInputSchema, userInputSchema } from './joi';
+
+const errorHandle = (error: ValidationError) => {
+  if (error?.details[0].type === 'any.required') {
+    return { code: 400, message: error.message };
+  }
+  return { code: 422, message: error.message };
+};
 
 const validLoginInputs = async (req: Request, res: Response, next: NextFunction) => {
   const data = req.body;
@@ -17,10 +23,23 @@ const validateProductsInputs = (req: Request, res: Response, next: NextFunction)
   
   const { error } = productInputSchema(data);
   
-  if (error?.details[0].type === 'any.required') {
-    return res.status(400).json({ message: error.message });
+  if (error) {
+    const { code, message } = errorHandle(error);
+    return res.status(code).json({ message });
   }
-  if (error) return res.status(422).json({ message: error.message });
+
+  next();
+};
+
+const validateUserInputs = (req: Request, res: Response, next: NextFunction) => {
+  const data = req.body;
+  
+  const { error } = userInputSchema(data);
+
+  if (error) {
+    const { code, message } = errorHandle(error);
+    return res.status(code).json({ message });
+  }
 
   next();
 };
@@ -28,4 +47,5 @@ const validateProductsInputs = (req: Request, res: Response, next: NextFunction)
 export {
   validLoginInputs,
   validateProductsInputs,
+  validateUserInputs,
 };

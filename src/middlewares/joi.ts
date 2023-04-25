@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import LoginInput from '../interfaces/LoginInput';
 import Product from '../interfaces/Product';
+import User from '../interfaces/User';
 
 const loginInputSchema = (body: LoginInput) => Joi.object({
   username: Joi.string().required(),
@@ -14,7 +15,16 @@ const productInputSchema = (body: Product) => Joi.object({
   orderId: Joi.number(),
 }).validate(body); 
 
+const userInputSchema = (body: User) => Joi.object({
+  id: Joi.number(),
+  username: Joi.string().min(3).required(),
+  vocation: Joi.string().min(3).required(),
+  level: Joi.number().min(1).required(),
+  password: Joi.string().min(8).required(),
+}).validate(body); 
+
 export { 
   loginInputSchema, 
   productInputSchema,
+  userInputSchema,
 };

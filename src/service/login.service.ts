@@ -14,8 +14,7 @@ class LoginService {
 
   public async login(data: LoginInput): Promise<string | void> {
     const [result] = await this.model.login(data);
-    console.log(result);
-    if (result === undefined) throw new Error('UNAUTHORIZED'); // { "message": "Username or password invalid" }
+    if (result === undefined) throw new Error('UNAUTHORIZED');
     return jwt.sign({ id: result.id, username: result.username }, SECRET_KEY);
   }
 }
