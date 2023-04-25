@@ -13,6 +13,12 @@ class OrdersController {
     const result = await this.orderService.getOrders();
     res.status(200).json(result);
   }
+  
+  public newOrder = async (req: Request, res: Response) => { 
+    const { productsIds, currentUserId } = req.body;
+    const result = await this.orderService.newOrder(currentUserId, productsIds);
+    res.status(201).json(result);
+  };
 }
 
 export default OrdersController;

@@ -12,6 +12,9 @@ class OrdersService {
   public async getOrders(): Promise<Orders[]> {
     return this.model.getOrders();
   }
+  
+  public newOrder = async (userId: number, products: number[]): Promise<Orders> => this.model
+    .newOrder(userId, products);
 }
 
 export default OrdersService;
