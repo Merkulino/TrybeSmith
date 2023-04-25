@@ -12,7 +12,7 @@ class LoginController {
   async login(req: Request, res: Response) { 
     const data = req.body;
     const result = await this.loginService.login(data);
-    res.status(201).json({ token: result });
+    res.status(200).json({ token: result });
   }
 }
 
